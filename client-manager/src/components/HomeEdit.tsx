@@ -2,13 +2,13 @@ import { useEffect, FC } from 'react'
 import { MapContainer, Marker, Polygon, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
-import { LatLngExpression } from 'leaflet'
+import { Icon, LatLngExpression } from 'leaflet'
 import 'leaflet-routing-machine'
 import { Button, Card } from 'antd'
 import appState from '../store/appState'
 import { PlusOutlined } from '@ant-design/icons'
 
-const LARGE_ZONE_POLYGON: LatLngExpression[] = [
+export const LARGE_ZONE_POLYGON: LatLngExpression[] = [
   [59.928411, 30.274907],
   [59.931409, 30.281078],
   [59.935157, 30.29632],
@@ -38,7 +38,7 @@ const LARGE_ZONE_POLYGON: LatLngExpression[] = [
   [59.92238, 30.271074],
 ]
 
-const SMALL_ZONE_POLYGON: LatLngExpression[] = [
+export const SMALL_ZONE_POLYGON: LatLngExpression[] = [
   [59.930813, 30.360679],
   [59.915282, 30.350087],
   [59.916158, 30.343032],
@@ -92,12 +92,21 @@ export const HomeEdit: FC = () => {
           <Button disabled>Редактировать стоимости</Button>
         </div>
         <MapContainer
-          center={[59.9343, 30.3351]}
+          center={[59.913763, 30.317974]}
           zoom={12}
           style={{ height: '80vh' }}
         >
           <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}" />
-          <Marker position={[59.913763, 30.317974]} />
+          <Marker
+            position={[59.913763, 30.317974]}
+            icon={
+              new Icon({
+                iconUrl: '/marker-icon-2x-purple.png',
+                iconSize: [25, 41],
+                iconAnchor: [12.5, 41],
+              })
+            }
+          />
           <Polygon
             positions={LARGE_ZONE_POLYGON}
             pathOptions={{ color: '#FAAD1480' }}
