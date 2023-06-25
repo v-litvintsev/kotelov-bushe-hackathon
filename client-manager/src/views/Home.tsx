@@ -2,6 +2,7 @@ import { Progress, Radio, RadioChangeEvent } from 'antd'
 import { FC, useState } from 'react'
 import { HomeOrdersList } from '../components/HomeOrders'
 import appState from '../store/appState'
+import { HomeEdit } from '../components/HomeEdit'
 
 export const Home: FC = () => {
   const [activeTab, setActiveTab] = useState<'history' | 'edit'>('history')
@@ -19,7 +20,7 @@ export const Home: FC = () => {
           style={{ marginBottom: 8 }}
         >
           <Radio.Button value="history">История заказов</Radio.Button>
-          <Radio.Button value="edit">Редактировать смену</Radio.Button>
+          <Radio.Button value="edit">Смена</Radio.Button>
         </Radio.Group>
         <div style={{ width: 300 }}>
           <Progress
@@ -34,11 +35,7 @@ export const Home: FC = () => {
       </div>
       <div>
         {activeTab === 'history' && <HomeOrdersList />}
-        {activeTab === 'edit' && (
-          <div>
-            <h2>Редактировать смену</h2>
-          </div>
-        )}
+        {activeTab === 'edit' && <HomeEdit />}
       </div>
     </div>
   )
