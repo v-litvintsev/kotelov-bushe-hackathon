@@ -55,9 +55,27 @@ export const HomeOrdersList: FC = observer(() => {
     setActiveTab(e.target.value)
   }
 
+  const handleMoveToNextStepClosure = (updatedOrder: any) => () => {
+    const updatedData = {
+      ...appState.data,
+      orders: appState.data.orders.map((item) => {
+        if (item.id === updatedOrder.id) {
+          return {
+            ...item,
+            status: item.status + 1,
+          }
+        }
+
+        return item
+      }),
+    }
+
+    appState.setData(updatedData)
+  }
+
   useEffect(() => {
     if (updateOrderMutation.error) {
-      message.error('Произошла ошибка при обновлении заказа')
+      // message.error('Произошла ошибка при обновлении заказа')
     }
   }, [updateOrderMutation.error])
 
@@ -157,12 +175,7 @@ export const HomeOrdersList: FC = observer(() => {
                     <Button
                       type="primary"
                       style={{ width: '100%' }}
-                      onClick={() => {
-                        updateOrderMutation.mutate({
-                          ...item,
-                          status: item.status + 1,
-                        })
-                      }}
+                      onClick={handleMoveToNextStepClosure(item)}
                     >
                       Перевести на следующий этап
                     </Button>

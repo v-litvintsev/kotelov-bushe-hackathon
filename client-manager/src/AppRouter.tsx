@@ -25,7 +25,7 @@ const AppRouter: FC = () => {
 
   useEffect(() => {
     if (dataError) {
-      message.error('Произошла ошибка при загрузке данных')
+      // message.error('Произошла ошибка при загрузке данных')
     }
   }, [dataError])
 
