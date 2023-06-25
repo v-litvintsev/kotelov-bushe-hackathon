@@ -20,5 +20,8 @@
     "lodash": "^4.17.21",
     "mysql2": "^3.4.1",
     "nodemon": "^2.0.22"
+  },
+  "devDependencies": {
+    "express-swagger-generator": "^1.1.17"
   }
 }
