@@ -3,9 +3,12 @@ import { FC, useState } from 'react'
 import { HomeOrdersList } from '../components/HomeOrders'
 import appState from '../store/appState'
 import { HomeEdit } from '../components/HomeEdit'
+import { HomeCurrent } from '../components/HomeCurrent'
 
 export const Home: FC = () => {
-  const [activeTab, setActiveTab] = useState<'history' | 'edit'>('history')
+  const [activeTab, setActiveTab] = useState<'history' | 'edit' | 'current'>(
+    'history',
+  )
 
   const handleTabChange = (e: RadioChangeEvent) => {
     setActiveTab(e.target.value)
@@ -20,7 +23,8 @@ export const Home: FC = () => {
           style={{ marginBottom: 8 }}
         >
           <Radio.Button value="history">История заказов</Radio.Button>
-          <Radio.Button value="edit">Смена</Radio.Button>
+          <Radio.Button value="current">Смена</Radio.Button>
+          <Radio.Button value="edit">Редактировать смену</Radio.Button>
         </Radio.Group>
         <div style={{ width: 300 }}>
           <Progress
@@ -36,6 +40,7 @@ export const Home: FC = () => {
       <div>
         {activeTab === 'history' && <HomeOrdersList />}
         {activeTab === 'edit' && <HomeEdit />}
+        {activeTab === 'current' && <HomeCurrent />}
       </div>
     </div>
   )

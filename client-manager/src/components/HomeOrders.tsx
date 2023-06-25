@@ -31,6 +31,12 @@ export const HomeOrdersList: FC = observer(() => {
   )
 
   useEffect(() => {
+    if (updateOrderMutation.data) {
+      appState.setData(updateOrderMutation.data)
+    }
+  }, [updateOrderMutation.data])
+
+  useEffect(() => {
     setPreviousReceivedOrdersCount((prevCount) => {
       const currentCount = appState.data.orders.filter(
         (item) => item.status === 0,
@@ -143,7 +149,7 @@ export const HomeOrdersList: FC = observer(() => {
                       <tr>
                         <td colSpan={2}>Итого:</td>
                         <td>{item.totalCost}₽</td>
-                        <td>{item.totalWeight}₽</td>
+                        <td>{item.totalWeight}</td>
                       </tr>
                     </tbody>
                   </table>

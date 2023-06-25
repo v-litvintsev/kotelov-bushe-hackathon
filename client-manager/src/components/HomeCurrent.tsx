@@ -6,7 +6,6 @@ import { LatLngExpression } from 'leaflet'
 import 'leaflet-routing-machine'
 import { Button, Card } from 'antd'
 import appState from '../store/appState'
-import { PlusOutlined } from '@ant-design/icons'
 
 const LARGE_ZONE_POLYGON: LatLngExpression[] = [
   [59.928411, 30.274907],
@@ -48,7 +47,51 @@ const SMALL_ZONE_POLYGON: LatLngExpression[] = [
   [59.935319, 30.326773],
 ]
 
-export const HomeEdit: FC = () => {
+// const MapCustomComponent: FC<{
+//   startPoint: LatLngExpression
+//   finishPoint: LatLngExpression
+// }> = ({ startPoint, finishPoint }) => {
+//   // const map = useMap()
+
+//   // useEffect(() => {
+//   //   leaflet
+//   //     .tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//   //       attribution: 'Map data &copy; OpenStreetMap contributors',
+//   //     })
+//   //     .addTo(map)
+//   //   ;(leaflet as any).Routing.control({
+//   //     waypoints: [startPoint, finishPoint],
+//   //     router: new (leaflet as any).Routing.GraphHopper(
+//   //       'YOUR_GRAPHHOPPER_API_KEY',
+//   //     ),
+//   //     containerClassName: 'routing-control-container',
+//   //   }).addTo(map)
+//   // }, [map, startPoint, finishPoint])
+
+//   return (
+//     <MapContainer
+//       center={[59.9343, 30.3351]}
+//       zoom={12}
+//       style={{ height: '80vh' }}
+//     >
+//       <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}" />
+//       <Marker position={[59.913763, 30.317974]} />
+//       <Polygon
+//         positions={LARGE_ZONE_POLYGON}
+//         pathOptions={{ color: '#FAAD1480' }}
+//       />
+//       <Polygon
+//         positions={SMALL_ZONE_POLYGON}
+//         pathOptions={{ color: '#52C41A80' }}
+//       />
+//     </MapContainer>
+//   )
+// }
+
+export const HomeCurrent: FC = () => {
+  // const startPoint: LatLngExpression = [51.505, -0.09] // Start point coordinates
+  // const finishPoint: LatLngExpression = [51.51, -0.11] // End point coordinates
+
   useEffect(() => {
     document.querySelector('.leaflet-control-attribution')?.remove()
   }, [])
@@ -56,7 +99,7 @@ export const HomeEdit: FC = () => {
   return (
     <div style={{ display: 'flex', gap: 10 }}>
       <div style={{ width: '50%' }}>
-        <h2>Стоимость зон доставки</h2>
+        <h2>Карта</h2>
         <div
           style={{
             display: 'flex',
@@ -89,7 +132,6 @@ export const HomeEdit: FC = () => {
               Большая зона: <b>1000₽</b>
             </div>
           </div>
-          <Button disabled>Редактировать стоимости</Button>
         </div>
         <MapContainer
           center={[59.9343, 30.3351]}
@@ -109,50 +151,42 @@ export const HomeEdit: FC = () => {
         </MapContainer>
       </div>
       <div style={{ width: '50%' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-          <h2>Курьеры</h2>
-          <Button
-            size="small"
-            type="primary"
-            disabled
-            style={{ position: 'relative', top: -5 }}
-          >
-            <PlusOutlined />
-          </Button>
-        </div>
+        <h2>Активные курьеры</h2>
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
             gap: 10,
-            height: 'calc(80vh + 52px)',
+            height: 'calc(80vh + 42px)',
             overflow: 'scroll',
           }}
         >
-          {appState.data.couriers.map((courier) => (
-            <Card title={courier.name} key={courier.id}>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}
-              >
+          {appState.data.couriers
+            .filter((courier) => courier.status === 'на доставке')
+            .map((courier) => (
+              <Card title={courier.name} key={courier.id}>
                 <div
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 20,
+                    justifyContent: 'space-between',
                   }}
                 >
-                  <p>{courier.phone}</p>
-                  <p>{courier.status}</p>
-                  <p>Заказ №{courier.orderId}</p>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 20,
+                    }}
+                  >
+                    <p>{courier.phone}</p>
+                    <p>{courier.status}</p>
+                    <p>Заказ №{courier.orderId}</p>
+                  </div>
+                  <Button type="primary">На карте</Button>
                 </div>
-                <Button disabled>Редактировать</Button>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            ))}
         </div>
       </div>
     </div>

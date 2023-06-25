@@ -14,7 +14,7 @@ class AppState {
   isUserLoaded = false
   data = {
     currentCouriersTraffic: {
-      percentage: 49,
+      percentage: 46,
       maxCount: 30,
       currentCount: 14,
     },
@@ -73,6 +73,50 @@ class AppState {
           },
         ],
       })),
+    couriers: [
+      {
+        id: 0,
+        name: 'Влад Вадимов',
+        phone: '+7 999 389 79 74',
+        status: 'на доставке',
+        orderId: 0,
+      },
+      {
+        id: 1,
+        name: 'Степан Костыркин',
+        phone: '+7 938 490 38 47',
+        status: 'на доставке',
+        orderId: 1,
+      },
+      {
+        id: 2,
+        name: 'Никита Нова',
+        phone: '+7 920 849 48 38',
+        status: 'на хабе',
+        orderId: 2,
+      },
+      {
+        id: 3,
+        name: 'Виктор Рындин',
+        phone: '+7 920 820 48 93',
+        status: 'на доставке',
+        orderId: 3,
+      },
+      {
+        id: 4,
+        name: 'Константин Лобанов',
+        phone: '+7 928 848 84 39',
+        status: 'на доставке',
+        orderId: 4,
+      },
+      {
+        id: 5,
+        name: 'Женя Бондарь',
+        phone: '+7 928 848 84 39',
+        status: 'на доставке',
+        orderId: 5,
+      },
+    ],
   }
 
   constructor() {
