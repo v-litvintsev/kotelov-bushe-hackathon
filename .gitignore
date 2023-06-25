@@ -1,1 +1,5 @@
 **/.DS_Store
+/server/node_modules
+/server/docker/mysql
+/.idea
+.idea
