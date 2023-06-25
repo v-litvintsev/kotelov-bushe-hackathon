@@ -15,7 +15,7 @@ class AppState {
 
   orders = Array.from({ length: 5 }, (_, idx) => {
     return {
-      id: idx,
+        id: idx,
         status:0,
         deliverTo: '13:30',
         totalCost: 5368,
@@ -78,7 +78,16 @@ class AppState {
     return this.orders
   }
 
-
+  finishOrder(id: number) {
+    
+    return new Promise((res, _) => {
+      const findOrder = this.orders.find(order => order.id === id)
+      if (findOrder) {
+        findOrder.status = 1
+        res(1)
+      } 
+    })
+  }
 
 
 }
