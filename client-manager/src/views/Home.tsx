@@ -4,9 +4,11 @@ import { HomeOrdersList } from '../components/HomeOrders'
 import appState from '../store/appState'
 import { HomeEdit } from '../components/HomeEdit'
 import { HomeCurrent } from '../components/HomeCurrent'
+import {OnRoute} from '../components/OnRoute'
+
 
 export const Home: FC = () => {
-  const [activeTab, setActiveTab] = useState<'history' | 'edit' | 'current'>(
+  const [activeTab, setActiveTab] = useState<'history' | 'edit' | 'current' | 'on-route'>(
     'history',
   )
 
@@ -25,6 +27,7 @@ export const Home: FC = () => {
           <Radio.Button value="history">История заказов</Radio.Button>
           <Radio.Button value="current">Смена</Radio.Button>
           <Radio.Button value="edit">Редактировать смену</Radio.Button>
+          <Radio.Button value="on-route">Курьеры на линии</Radio.Button>
         </Radio.Group>
         <div style={{ width: 300 }}>
           <Progress
@@ -41,6 +44,7 @@ export const Home: FC = () => {
         {activeTab === 'history' && <HomeOrdersList />}
         {activeTab === 'edit' && <HomeEdit />}
         {activeTab === 'current' && <HomeCurrent />}
+        {activeTab === 'on-route' && <OnRoute />}
       </div>
     </div>
   )
