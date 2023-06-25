@@ -110,7 +110,7 @@ const Homepage = (props: any) => {
                     <Card
                       style={{
                         width: 300,
-                        backgroundColor: '#D9D9D9',
+                        backgroundColor: order.status === 0 ? '#D9D9D9' : '#efefef',
                         borderRadius: 8,
                         marginBottom: 8,
                       }}
